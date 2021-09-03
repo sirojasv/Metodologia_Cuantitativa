@@ -1,0 +1,60 @@
+p{
+text-align: justify;
+}
+
+.azul{
+color:#23395b ;
+}
+
+code.bold{
+font-weight: bold;
+}
+
+.blanco{
+color: white;
+}
+
+code.blanco{
+color: white;
+font-weight: bold;
+}
+
+.small{ font-size: 70% }
+
+.large{ font-size: 130% }
+
+.left-code {
+  color: #777;
+  width: 38%;
+  height: 92%;
+  float: left;
+}
+
+.right-plot {
+  width: 60%;
+  float: right;
+  padding-left: 1%;
+}
+
+.linea-superior {
+  background-size: contain;
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  width: 1200px;
+  height: 7px;
+  background: #610E83;
+  margin-top: 5px;
+}
+
+.linea-inferior {
+  background-size: contain;
+  position: absolute;
+  bottom: 0em;
+  top: 0em;
+  left: 0em;
+  width: 1200px;
+  height: 7px;
+  background: #610E83;
+  margin-top: 5px;
+}

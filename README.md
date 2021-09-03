@@ -1,4 +1,4 @@
-# Metodologia_Cuantitativa
+# Metodologia Cuantitativa
 Clases de R del curso Metodología Cuantitativa
 
 Este curso consta de...
