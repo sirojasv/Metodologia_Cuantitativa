@@ -7,8 +7,8 @@ date: "25 agosto, 2021"
 output:
   xaringan::moon_reader:
     css:  
-      - xaringan-themer.css
-      - estilos.css
+      - ./xaringan-themer.css
+      - ./estilos.css
     lib_dir: libs
     seal: false
     nature:
@@ -21,7 +21,7 @@ output:
 ---
 
 class: inverse, left, bottom
-background-image: url("01_clase 1/media/logo_puc2.png")
+background-image: url("./media/logo_puc2.png")
 background-position: 95% 7%
 background-size: 20%
 
@@ -461,7 +461,7 @@ Para ver la barra de navegación utilizamos el atajo ***Ctrl/Cmd*** + ***Shift**
 
 ---
 class: inverse, left, bottom
-background-image: url("01_clase 1/media/logo_puc2.png")
+background-image: url("./media/logo_puc2.png")
 background-position: 95% 7%
 background-size: 20%
 

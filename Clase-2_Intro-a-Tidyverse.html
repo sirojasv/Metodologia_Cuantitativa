@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Metodología Cuantitativa</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Sebastián Rojas Vergara" />
+    <script src="libs/header-attrs-2.10/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="estilos.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: inverse, left, bottom
+background-image: url("./media/logo_puc2.png")
+background-position: 95% 7%
+background-size: 20%
+
+
+## Metodología Cuantitativa
+----------------
+### Clase 2: Introducción a Tidyverse
+#### Escuela de Trabajo Social - Pontificia Universidad Católica de Chile
+#### Sebastián Rojas Vergara
+#### 01 de septiembre, 2021
+
+
+
+
+
+---
+## Contenidos
+
+1. **Presentar el paquete `dplyr` de tidyverse**.
+
+2. **Presentar el flujo de trabajo con proyectos de RStudio**.
+
+3. **Practicar el procesamiento de datos con dplyr para la manipulación de filas y columnas**.
+---
+class: inverse, middle
+
+
+# I. Repaso de la clase anterior
+
+
+---
+## Clase anterior
+
+En la clase anterior revisamos:
+
+ - Cómo iniciar Rstudio y descripción de los 4 paneles (consola, enviroment, utilidades y script).
+ 
+ - Cómo comenzar un script en R y la instalación de paquetes.
+ 
+ - Concepto de **objeto** en R. Recomendaciones para nombrar objetos.
+ 
+ - Tipos y estructuras de datos con los comandos **`class`** y **`typeof`**.
+ 
+ - Presentación y construcción de vectores, matrices, data frames (tibbles) y listas.
+ 
+ - Cómo comentar, seccionar y guardar un script.
+ 
+ 
+---
+
+## Tidyverse
+
+- Es una colección de paquetes diseñadas para ciencia de datos. Todos los paquetes comparten una filosofía de diseño, gramática y estructura de datos. En particular, en esta clase veremos el paquete **`dplyr`** que está pensado en la manipulación de datos.
+
+- También veremos el paquete **`haven`** que sirve para importar y exportar bases de datos en Stata y SPSS. Este ya viene instalado por **`tidyverse`**, pero debe cargarse con la función **`library`**.
+
+---
+
+## Algunas funciones de **`dplyr`** I
+
+**Manipulación básica de columnas**
+
+--
+- **`relocate()`**: reordena la posición de las variables en una base de datos.
+
+--
+
+- **`select()`**: selecciona y devuelve un conjunto de columnas.
+--
+
+- **`rename()`**: renombra columnas en una base de datos.
+
+--
+
+**Manipulación básica de filas**
+--
+
+- **`arrange()`**: reordena filas de un data frame.
+
+--
+
+- **`filter()`**: selecciona y devuelve un conjunto de filas según una o varias condiciones lógicas.
+
+--
+
+- **`slice()`**: selecciona filas basadas en su posición.
+
+---
+
+## Algunas funciones de **`dplyr`** II
+
+**Herramientas básicas de edición de datos**
+
+--
+
+- **`recode()`**: permite el reemplazo de valores numéricos; también de variables `character` y `factor` basados en sus nombres. En el caso de vectores lógicos.
+
+--
+
+- **`if_else()`**: evaluación de condiciones, y asignación de valores.
+
+--
+
+- **`na_if()`**: convierte valores a NA según una condición.
+
+--
+
+- **`mutate()`**: añade nuevas variables o transforma variables existentes.
+
+--
+
+- **`summarise()`**: calcula un resumen a partir de funciones de R (media, mínimo, máximo, etc.).
+
+--
+
+- **`group_by()`**: agrupa filas según una o más variables. Para remover la agrupación, se debe utilizar posteriormente el comando **`ungroup()`**.
+
+--
+
+- **`rowwise()`**: agrupa resultados por filas. Muy útil en conjunto con **`mutate()`**.
+
+
+---
+
+## Algunas funciones de **`dplyr`** III
+
+**Otras funciones relevantes**
+
+--
+
+- **`across()`**: es una función más avanzada que permite realizar operaciones circulares (loops) en menos líneas de código y de manera más eficiente en términos computacionales. Con esta función, por ejemplo, se podría calcular la media para múltiples variables simultáneamente. Se utiliza en conjunto con **`mutate()`** y **`summarise()`**.
+
+--
+
+- **`case_when()`**: es una versión generalizada y más avanzada del comando **`if_else()`** y permite evaluar múltiples condiciones. Si los casos no calzan con ninguna de estas condiciones, R devolverá un valor NA (missing).
+
+--
+- **`count()`**: permite contar los valores para una o más variables. Se puede usar en conjunto con **`group_by()`**.
+
+---
+
+class: inverse, middle
+
+
+# 2. Trabajar con proyectos de RStudio
+
+---
+
+## Directorios de trabajo y Proyectos
+
+.pull-left[
+
+- El directorio de trabajo refiere a la ruta del computador donde R busca los archivos que le pedimos que lea y dónde guarda los archivos con los que trabajamos.
+
+- Las rutas pueden causar problemas porque se escriben de manera diferente según el sistema operativo y porque es improbable que los usuarios tengan la misma ruta.
+
+- Por esta razón, se trabajará con los archivos **Project** de Rstudio. Esto les aliviará muchísimo sufrimiento con R.
+
+- Para crear un proyecto deben seleccionar ***File*** → ***New Project*** y escoger entre un nuevo directorio o uno ya existente. Usualmente será esta última opción, asumiendo que ya tienen la carpeta creada.
+
+
+]
+
+.pull-right[
+
+&lt;img src="media/Proyectos_R.png" width="70%" style="display: block; margin: auto;" /&gt;
+Un ejemplo de una configuración básica de un proyecto en RStudio.
+]
+
+---
+
+class: inverse, middle
+
+
+# 3. Ejercicios con dplyr y condiciones lógicas
+
+
+---
+
+## Ejercicio
+
+Si tienes problemas con un comando o paquete, puedes escribir **`?nombre_comando`** o **`?nombre_paquete`** y se abrirá una pantalla de ayuda.
+
+1. Carga y/o instala según corresponda los siguientes paquetes: tidyverse (dplyr) y haven.
+
+2. Utilizando la función **`read_stata`** del paquete haven, importa los datos de ejemplo llamada *"02_Clase 2_Muestra_Casen2020"*.
+
+A continuación realizaremos ejercicios con los siguientes comandos de dplyr.
+
+- **`read_stata`()**
+- **`glimpse`()**
+- **`relocate()`**
+- **`select()`**
+- **`rename()`**
+- **`count()`**
+- **`group_by()`**
+- **`filter()`**
+- **`arrange()`**
+- **`slice()`**
+
+---
+
+## Condiciones lógicas
+
+Para la programación en R se requiere manejar condiciones logícas. A continuación, se presentan las más relevantes.
+
+|**Símbolo** | **Significado**  |
+|---|---|
+| ==  |  Igualdad. No debe confundirse con `\(=\)`, que es un operador de asignación|
+| !=  |  Distinto |
+| !  |  Negación de una expresión lógica |
+| &gt;  |  Mayor que |
+|&gt;=	|Mayor o igual que|
+| &lt; | Menor que  |
+|&lt;=	|Menor o igual que|
+|&amp; |Operador “y”. Todas las condiciones evaluadas deben ser verdaderas para que la expresión completa lo sea|
+| &amp;#124; |Operador “o”. Al menos una condición debe ser verdaderas para que la expresión completa lo sea|
+
+---
+
+## ¿Y ahora qué sigue?
+
+Hay muchísimo material para revisar sobre R. Cada día se aprenden nuevas cosas y normal tener problemas o quedarse atascado con un código. Para nuestra suerte, la comunidad es muy activa. Algunas referencias:
+
+
+- **Libro R para Ciencia de Datos**. Traducción en español del libro "R for Data Science" &lt;u&gt;[https://es.r4ds.hadley.nz/](https://es.r4ds.hadley.nz/)&lt;/u&gt;.
+
+- **RStudio cheatsheets**. Una serie de "torpedos" con las funciones más útiles de cada paquete
+&lt;u&gt;[https://www.rstudio.com/resources/cheatsheets/](https://www.rstudio.com/resources/cheatsheets/).&lt;/u&gt;
+
+- **R Ladies - Chile**. Es una organización que promueve la diversidad de género en la comunidad de R. Cuenta con grupos en Santiago, Valparaíso, Concepción y Talca. &lt;u&gt;[https://www.meetup.com/rladies-scl/](https://www.meetup.com/rladies-scl/)&lt;/u&gt;.
+
+- **Stackoverflow**. Página web que funciona en modalidad de foro donde otros usuarios responden tus dudas. Se usa para múltiples lenguajes de programación, incluido R. Muchísimas de las dudas que tengas ya tendrán respuesta aquí. 
+
+- Y muchas otras más: &lt;u&gt;[AnalizaR Datos Políticos](https://arcruz0.github.io/libroadp/)&lt;/u&gt;; &lt;u&gt;[Manual de R Sociología Universidad de Chile - Estadística Descriptiva](https://bookdown.org/gboccardo/manual-ED-UCH/)&lt;/u&gt;;
+&lt;u&gt;[R Bloggers](https://www.r-bloggers.com/)&lt;/u&gt; y páginas de Twitter como &lt;u&gt;[@rfunctionaday](https://twitter.com/rfunctionaday)&lt;/u&gt;.
+
+
+
+---
+class: inverse, left, bottom
+background-image: url("./media/logo_puc2.png")
+background-position: 95% 7%
+background-size: 20%
+
+# &lt;center&gt;¡Gracias!&lt;/center&gt;
+
+
+## Metodología Cuantitativa
+----------------
+### Clase 2: Introducción a Tidyverse
+#### Escuela de Trabajo Social - Pontificia Universidad Católica de Chile
+#### Sebastián Rojas Vergara
+#### 01 de septiembre, 2021
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9",
+"fig_caption": true
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
